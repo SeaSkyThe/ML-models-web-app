@@ -55,15 +55,10 @@
         <p>Escolha um filme que você gosta:</p>
 
         <form action="{{url_for('predict')}}" method="post">
-            <input list="movies" name="movie" placeholder="Spider-Man 2" required="required" />
-            <datalist id="movies">
-                <option value="Movie1">
-                <option value="Movie2">
-                <option value="Movie3">
-                <option value="Movie4">
-                <option value="Movie5">
-                <option value="Movie6">
-            </datalist>
+            <input id="movies_datalist" name="movie" placeholder="Spider-Man 2" required="required" />
+            <!-- <datalist id="movies_datalist">
+                
+            </datalist> -->
             <button type="submit" class="btn btn-primary btn-block btn-large">Gerar recomendações</button>
 
         </form>    
@@ -74,4 +69,7 @@
     </div>
     
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script type="text/javascript" src="../static/script.js"></script>
 </html>
