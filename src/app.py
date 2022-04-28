@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import pickle
+from models import *
 
 app = Flask(__name__)
 
@@ -17,10 +18,14 @@ def recommender_form_page():
 def recommender_results_page():
     """Pega o filme de entrada e gera as recomendações"""
     #print(request.form)
-    movie = str(request.form["movie"])
+    movie_name = str(request.form["movie"])
+
+    model = Model('src/models/knn_cf.sav')
+    distances, suggestions, lista_recomendacoes = model.generate_recommendations(movie_name = movie_name, printable=False)
+
     #prediction = model.predict([[rooms, distance]])
     #output = round(prediction[0], 2) 
-    return render_template('recommender_results.html', prediction_text=f'As recomendações para o filme {movie} são: {movie}')
+    return render_template('recommender_results.html', prediction_text=f'As recomendações para o filme {movie_name} são: {lista_recomendacoes}')
     
 
 
