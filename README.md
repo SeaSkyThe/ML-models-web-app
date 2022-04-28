@@ -1,2 +1,4 @@
 # ML-models-web-app
-Aplicação Web feita para subir os modelos de Machine Learning para recomendação de filmes.
+Aplicação Web com intuito de exibir um dos modelos de recomendação de filmes, baseado em Machine Learning, criado durante o meu TCC. 
+
+Desenvolvimento sendo feito como framework Flask.
