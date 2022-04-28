@@ -4,5 +4,9 @@ $("#movies_datalist").autocomplete({
 	source: function(request, response){
 		var results = $.ui.autocomplete.filter(movie_list, request.term);
 		response(results.slice(0, 10));
-	}
+	},
+	change: function(event, ui) {
+            if(ui.item === null || !ui.item)
+               $(this).val(''); //limpa o valor caso não seja um valor da lista, forçando o uso
+        }
 });

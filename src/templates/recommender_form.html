@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<!-- THIS IS THE PAGE THAT SHOWS THE FORM -->
+{% block title %}
+    Machine Learning Recommender System
+{% endblock %}
+
+{% block content %}
+    <!-- Form responsavel por receber inputs -->
+    <div>
+        <h2>Recomendação de Filmes</h2>
+        <p>Escolha um filme que você gosta:</p>
+
+        <form action="{{url_for('recommender_results_page')}}" method="post">
+            <input id="movies_datalist" name="movie" placeholder="Spider-Man 2" required="required" />
+            <!-- <datalist id="movies_datalist">
+                
+            </datalist> -->
+            <button type="submit" class="btn btn-primary btn-large">Gerar recomendações</button>
+
+        </form>    
+        <br>
+        <br>
+
+    </div>
+
+{% endblock %}
