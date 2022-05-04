@@ -8,9 +8,20 @@
 	<div class="col-md-5 p-lg-5 mx-auto my-5">
 		<h1 class="display-4 font-weight-normal">Sistemas de Recomendação</h1>
 		<p class="lead font-weight-normal">Sistemas de Recomendação baseados em Técnicas e modelos de Machine Learning, é o título dado ao trabalho  desenvolvido pelo aluno Marcelo Eduardo Rodrigues da Silva Filho pela Universidade Estadual Paulista (UNESP), onde uma das produções está aqui apresentada para uso.</p>
-		<a class="btn btn-outline-secondary" href="{{ url_for('recommender_form_page') }}">Utilizar Modelo de Recomendação de Filmes</a>
+		<a id="btn_redirecionar_pag_recomendacoes"class="btn btn-outline-secondary" href="{{ url_for('recommender_form_page') }}">Utilizar Modelo de Recomendação de Filmes</a>
 	</div>
-	<div class="product-device shadow-sm d-none d-md-block"></div>
-	<div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+
+	<!-- icones do lado direito -->
+	
+	<img id="img-dir" class="film-img" src="static/icons/film.svg" onerror="this.onerror=null; this.src='static/icons/film.svg'">
+	<img id="img-esq" class="film-img film-img-2" src="static/icons/film.svg" onerror="this.onerror=null; this.src='static/icons/film.svg'">
+
+	<!-- <i class="fa-solid fa-film "></i>
+	<i class="fa-solid fa-film fa-film-2 "></i> -->
+
+	
+
 </div>
+
+
 {% endblock %}

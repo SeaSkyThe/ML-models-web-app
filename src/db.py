@@ -34,9 +34,13 @@ class Database():
 		uri = "mongodb+srv://" + username + ":" + password +"@ml-webapp.lrl8g.mongodb.net/ML-WebApp?retryWrites=true&w=majority"
 
 		#Criando conexao
-		self.client = pymongo.MongoClient(uri, server_api=ServerApi('1'), serverSelectionTimeoutMS=5000) #conectando ao database
+		try:
+			self.client = pymongo.MongoClient(uri, server_api=ServerApi('1'), serverSelectionTimeoutMS=5000) #conectando ao database
+			return self.client
+		except Exception as e:
+			print(f'Erro inesperado ao se conectar com o MongoDB Atlas {e=}, {type(err)=}')
+			return e
 
-		return self.client
 
 	#Funcao que só executa seu papel 1 vez - Envia os dados comprimidos para o MongoDB Altas
 	def upload_data_and_models_to_db(self, client: pymongo.MongoClient):
@@ -64,30 +68,37 @@ class Database():
 		objects = {} #dicionario de objetos para dar como retorno da funcao
 
 		
-		if(self.client != None):
+		if(self.client != None and isinstance(self.client, pymongo.MongoClient)):
 			client = self.client
 		
 		#Connectando com o banco Data utilizando o GRIDFS
-		fs = gridfs.GridFS(client.Data)
-		#pegando a versao comprimida direto do banco
-		compressed_movies_cf = fs.get_version('movies_cf').read()
-		#descomprimindo em pickle, e transformando o pickle em objeto novamente
-		movies_cf = compressor.decompress_and_depickle_pickle(compressed_movies_cf)
-		objects['movies_cf'] = movies_cf
+		try:
+			fs = gridfs.GridFS(client.Data)
+			#pegando a versao comprimida direto do banco
+			compressed_movies_cf = fs.get_version('movies_cf').read()
+			#descomprimindo em pickle, e transformando o pickle em objeto novamente
+			movies_cf = compressor.decompress_and_depickle_pickle(compressed_movies_cf)
+			objects['movies_cf'] = movies_cf
 
-		#pegando a versao comprimida direto do banco
-		compressed_movie_user_matrix = fs.get_version('movie_user_matrix_cf').read()
-		#descomprimindo em pickle, e transformando o pickle em objeto novamente
-		movie_user_matrix_cf = compressor.decompress_and_depickle_pickle(compressed_movie_user_matrix)
-		objects['movie_user_matrix'] = movie_user_matrix_cf
+			#pegando a versao comprimida direto do banco
+			compressed_movie_user_matrix = fs.get_version('movie_user_matrix_cf').read()
+			#descomprimindo em pickle, e transformando o pickle em objeto novamente
+			movie_user_matrix_cf = compressor.decompress_and_depickle_pickle(compressed_movie_user_matrix)
+			objects['movie_user_matrix'] = movie_user_matrix_cf
 
-		#Conectando com o banco 'Models' utilizando o GRIDFS
-		fs = gridfs.GridFS(client.Models)
-		compressed_knn_cf = fs.get_version('knn_cf').read()
-		knn_cf = compressor.decompress_and_depickle_pickle(compressed_knn_cf)
-		objects['knn_cf'] = knn_cf
+			#Conectando com o banco 'Models' utilizando o GRIDFS
+			fs = gridfs.GridFS(client.Models)
+			compressed_knn_cf = fs.get_version('knn_cf').read()
+			knn_cf = compressor.decompress_and_depickle_pickle(compressed_knn_cf)
+			objects['knn_cf'] = knn_cf
+
 		
-		return objects
+			return objects
+
+		except Exception as e:
+			print(f'Erro inesperado ao tentar resgatar os dados/modelo do MongoDB Atlas {e=}, {type(err)=}')
+			return e
+
 if __name__=='__main__':
 	database = Database()
 	client = database.create_conection()

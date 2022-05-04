@@ -3,7 +3,7 @@ var movie_list = ['Toy Story', 'Jumanji', 'Grumpier Old Men', 'Waiting to Exhale
 $("#movies_datalist").autocomplete({
 	source: function(request, response){
 		var results = $.ui.autocomplete.filter(movie_list, request.term);
-		response(results.slice(0, 10));
+		response(results.slice(0, 15));
 	},
 	change: function(event, ui) {
             if(ui.item === null || !ui.item)

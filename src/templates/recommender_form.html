@@ -7,17 +7,18 @@
 {% block content %}
     <!-- Form responsavel por receber inputs -->
 
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div id="content_div_recommender_form" class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
         <h2>Recomendação de Filmes</h2>
         <p>Escolha um filme que você gosta:</p>
 
         <form action="{{url_for('recommender_results_page')}}" method="post">
-            <input id="movies_datalist" name="movie" placeholder="Spider-Man 2" required="required" />
-            <!-- <datalist id="movies_datalist">
+            <div class="input-group">
+                <input id="movies_datalist" class="form-control" name="movie" aria-describedby="basic-addon2" placeholder="Spider-Man 2" required="required" />
                 
-            </datalist> -->
-            <button type="submit" class="btn btn-outline-primary btn-large ">Gerar recomendações</button>
-
+                <div class="input-group-append">
+                    <button id="botao_recomendacoes" type="submit" class="btn btn-primary ">Gerar recomendações</button>    
+                </div>
+            </div>
         </form>    
         <br>
         <br>
