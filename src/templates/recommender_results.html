@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
 <!-- THIS IS THE PAGE THAT SHOWS THE FORM -->
 {% block title %}
-    Recomendações
+    <title>Recommender System - Results</title>
 {% endblock %}
 
 {% block content %}
     <!-- Form responsavel por receber inputs -->
-    <div>
-        <h2>Recomendações: </h2>
+     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <h2>Recomendações para o filme {{movie_name}}</h2>
+        <br>
+        <table class="table" >
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Filme</th>
+                <th scope="col">Distância do filme pesquisado (cosseno)</th>
+                <th scope="col">Página do filme (IMDB)</th>
+            </tr>
+            {% set contador = namespace(value=1) %}
+            {% for recommendation in lista_recomendacoes %}
+                <tr>
+                    <td scope="row">{{contador.value}}</td>
+                    
+                    <!-- <td>{{recommendation[0]}} (ID: {{recommendation[1]}})</td> -->
+                    <td class="hover_img"><a href="{{cover_urls[recommendation]}}" target="_blank" style="text-decoration: none"> {{recommendation[0]}} <span><img id="cover_img" src="{{cover_urls[recommendation]}}" alt="image" height="1vh" width="1vh"></span></a> </td>
+                    <td>{{recommendation[2]}}</td>
+                    <td><a href={{recommendation[3]}} target="_blank">{{recommendation[3]}}</a></td>
 
-        <b> {{ prediction_text }} </b>
+                    {% set contador.value = contador.value + 1 %}
+                </tr>
+                
+            {% endfor %}
+
+        </table>
     </div>
+
 
 {% endblock %}
