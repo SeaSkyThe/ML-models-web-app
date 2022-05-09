@@ -3,13 +3,12 @@ from pymongo.server_api import ServerApi
 from urllib.parse import quote_plus
 import gridfs
 
-
-
 import os
-
+import time
 from compressor import *
 # Criando objeto para comprimir os arquivos pickle de dados e dos modelos
 compressor = Compressor()
+
 
 #GRIDFS é uma biblioteca que auxilia no manuseio de arquivos maiores que 16mb dentro de bancos de dados MongoDB
 
@@ -26,6 +25,7 @@ class Database():
 			cls._instance = cls()
 		return cls._instance
 
+	
 	def create_conection(self):
 		#utilizando Enviroment Variables
 		username = quote_plus(os.environ.get('MONGODB_USER'))
@@ -63,7 +63,7 @@ class Database():
 			compressed_model = compressor.compress_pickle(path_to_pickle='src/models/knn_cf.sav')
 			# Mandando para o MongoDB Atlas
 			knn_cf = fs.put(compressed_model, filename='knn_cf', content_type="ML-Model")
-
+	
 	def get_data_and_models_from_db(self):
 		objects = {} #dicionario de objetos para dar como retorno da funcao
 
@@ -96,8 +96,8 @@ class Database():
 			return objects
 
 		except Exception as e:
-			print(f'Erro inesperado ao tentar resgatar os dados/modelo do MongoDB Atlas {e=}, {type(err)=}')
-			return e
+			print(f'Erro inesperado ao tentar resgatar os dados/modelo do MongoDB Atlas {e=}, {type(e)=}')
+			return [[], [], []]
 
 if __name__=='__main__':
 	database = Database()

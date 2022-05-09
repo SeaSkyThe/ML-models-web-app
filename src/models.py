@@ -13,6 +13,10 @@ from pymongo.server_api import ServerApi
 
 N_NEIGHBORS = 11
 
+
+
+
+
 class Singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
@@ -20,7 +24,21 @@ class Singleton(type):
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
 
-
+import time
+def timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        te = time.time()
+        if 'log_time' in kw:
+            name = kw.get('log_name', method.__name__.upper())
+            kw['log_time'][name] = int((te - ts) * 1000)
+        else:
+            print ('%r  %2.2f ms' % \
+                  (method.__name__, (te - ts) * 1000))
+        return result
+    return timed
+   
 #CLASSE RESPONSAVEL POR CARREGAR OS MODELOS E OS DADOS E GERAR AS RECOMENDAÇÕES
 class Model(metaclass=Singleton):
 	def __init__(self, model_type=1):
@@ -31,7 +49,7 @@ class Model(metaclass=Singleton):
 
 		self.already_processed_recommendations = {}
 
-
+	@timeit
 	def load_data_and_model(self):
 		#se for diferente de None e não for uma Exception (erro)
 		if(self.db != None and not isinstance(self.db, Exception)):
@@ -40,6 +58,7 @@ class Model(metaclass=Singleton):
 		else: #caso for uma Exception, retorna a exception
 			return self.db
 
+	@timeit
 	def generate_recommendations(self, movie_name, printable=True):
 		if(self.model_type==1):
 			if(movie_name in self.already_processed_recommendations.keys()):
