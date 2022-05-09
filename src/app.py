@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, abort
 import pickle
 from models import *
 from urllib.parse import quote_plus
@@ -29,7 +29,7 @@ def recommender_results_page():
     model = Model()
 
     #lembrando - lista_recomendações é no formato: [(Nome do filme, ID, distancia, Link para o IMDB), (Nome do filme, ID, distancia,  Link para o IMDB)]
-    
+
     try:
         distances, suggestions, lista_recomendacoes = model.generate_recommendations(movie_name = movie_name, printable=False)
         # else:
@@ -43,21 +43,32 @@ def recommender_results_page():
         ia = Cinemagoer()
         for recommendation in lista_recomendacoes:
 
-            movie = ia.search_movie(recommendation[0])[0]
+            movie = ia.search_movie(recommendation[0])
 
-            cover_urls[recommendation] = movie['full-size cover url']
-        
-        
+            if(len(movie) >= 1):
+                movie = movie[0]
+                cover_urls[recommendation] = movie['full-size cover url']
+            else:
+                cover_urls[recommendation] = ''
         
 
         #print(lista_recomendacoes)
         #prediction = model.predict([[rooms, distance]])
         #output = round(prediction[0], 2) 
-        return render_template('recommender_results.html', movie_name=movie_name, lista_recomendacoes=lista_recomendacoes, cover_urls=cover_urls, is_error=False)
+        return render_template('recommender_results.html', movie_name=movie_name, lista_recomendacoes=lista_recomendacoes, cover_urls=cover_urls)
     
     except Exception as error:
         print(f'Erro ao gerar recomendações: {error}\n')
-        return render_template('recommender_results.html', movie_name=movie_name, lista_recomendacoes=lista_recomendacoes, cover_urls=cover_urls, is_error=True, error=error)
+        return internal_error(500)
+        
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('recommender_error.html'), 500
+
+@app.route('/recommender_error')
+def error500():
+    abort(500)
 
 if(__name__ == "__main__"):
     app.run(debug=True)

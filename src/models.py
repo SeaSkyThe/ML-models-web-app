@@ -1,7 +1,7 @@
 import pickle
 import pandas as pd
-import sklearn as sk
 import numpy as np
+import sklearn 
 from imdb import Cinemagoer #biblioteca utilizada para gerar o link baseado no nome do filme
 
 from compressor import *
@@ -12,8 +12,6 @@ from pymongo.server_api import ServerApi
 
 
 N_NEIGHBORS = 11
-
-
 
 
 
@@ -38,7 +36,7 @@ def timeit(method):
                   (method.__name__, (te - ts) * 1000))
         return result
     return timed
-   
+
 #CLASSE RESPONSAVEL POR CARREGAR OS MODELOS E OS DADOS E GERAR AS RECOMENDAÇÕES
 class Model(metaclass=Singleton):
 	def __init__(self, model_type=1):
@@ -49,7 +47,7 @@ class Model(metaclass=Singleton):
 
 		self.already_processed_recommendations = {}
 
-	@timeit
+	#@timeit
 	def load_data_and_model(self):
 		#se for diferente de None e não for uma Exception (erro)
 		if(self.db != None and not isinstance(self.db, Exception)):
@@ -58,7 +56,7 @@ class Model(metaclass=Singleton):
 		else: #caso for uma Exception, retorna a exception
 			return self.db
 
-	@timeit
+	#@timeit
 	def generate_recommendations(self, movie_name, printable=True):
 		if(self.model_type==1):
 			if(movie_name in self.already_processed_recommendations.keys()):
@@ -82,6 +80,7 @@ class Model(metaclass=Singleton):
 				    
 					distances, suggestions = model.kneighbors(movie_user_matrix.getrow(movieId).todense().tolist(), n_neighbors=N_NEIGHBORS)
 				    
+				
 					#Criando objeto imdb
 					ia = Cinemagoer()
 					for i in range(0, len(distances.flatten())):
@@ -98,17 +97,25 @@ class Model(metaclass=Singleton):
 								if(printable):
 									print('{0}: {1} (ID: {2}), com distância de {3} '.format(i, movie_title, movie_ID, movie_distance))
 
-								lista_recomendacoes.append((movie_title, 
-															movie_ID, 
-															movie_distance,
-															ia.get_imdbURL(movie_object_by_imdb[0])))
+
+								if(len(movie_object_by_imdb) >= 1): #se encontrou um filme com tal titulo na pesquisa, usa o objeto
+									lista_recomendacoes.append((movie_title, 
+																movie_ID, 
+																movie_distance,
+																ia.get_imdbURL(movie_object_by_imdb[0])))
+								else:
+									lista_recomendacoes.append((movie_title, 
+																movie_ID, 
+																movie_distance,
+																'Not Found'))
+
 								#Lista_recomendaçoes é uma lista no formato [(Nome do filme, ID, distancia, Link para o IMDB), (Nome do filme, ID, distancia,  Link para o IMDB)]
 					self.already_processed_recommendations[movie_title] = (distances, suggestions, lista_recomendacoes)
 
 					return distances, suggestions, lista_recomendacoes
 				else:
-					raise Exception("Desculpe, foi impossivel carregar os dados do MongoDB Atlas")
-					return None, None, None
+					raise Exception("Desculpe, foi impossivel gerar recomendações")
+					
 
 # class Model():
 # 	def __init__(self, path_to_model, model_type=1):

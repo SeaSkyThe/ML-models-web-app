@@ -38,7 +38,7 @@ class Database():
 			self.client = pymongo.MongoClient(uri, server_api=ServerApi('1'), serverSelectionTimeoutMS=5000) #conectando ao database
 			return self.client
 		except Exception as e:
-			print(f'Erro inesperado ao se conectar com o MongoDB Atlas {e=}, {type(err)=}')
+			print(f'Erro inesperado ao se conectar com o MongoDB Atlas {e=}, {type(e)=}')
 			return e
 
 
