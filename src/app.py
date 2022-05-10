@@ -1,6 +1,10 @@
 from flask import Flask, request, render_template, abort
 import pickle
-from models import *
+try:
+    from models import *
+except:
+    from src.models import *
+
 from urllib.parse import quote_plus
 import urllib
 
