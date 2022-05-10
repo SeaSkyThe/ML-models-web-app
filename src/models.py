@@ -4,8 +4,15 @@ import numpy as np
 import sklearn 
 from imdb import Cinemagoer #biblioteca utilizada para gerar o link baseado no nome do filme
 
-from compressor import *
-from db import *
+try:
+    from compressor import *
+except:
+    from src.compressor import *
+
+try:
+    from db import *
+except:
+    from src.db import *
 
 from flask_pymongo import pymongo
 from pymongo.server_api import ServerApi
