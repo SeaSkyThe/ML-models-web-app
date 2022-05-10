@@ -9,6 +9,9 @@ try:
 	from compressor import *
 except:
 	from src.compressor import *
+
+
+
 # Criando objeto para comprimir os arquivos pickle de dados e dos modelos
 compressor = Compressor()
 
@@ -101,6 +104,7 @@ class Database():
 			print(f'Erro inesperado ao tentar resgatar os dados/modelo do MongoDB Atlas {e=}, {type(e)=}')
 			return [[], [], []]
 
+	
 if __name__=='__main__':
 	database = Database()
 	client = database.create_conection()

@@ -119,10 +119,17 @@ class Model(metaclass=Singleton):
 								#Lista_recomendaçoes é uma lista no formato [(Nome do filme, ID, distancia, Link para o IMDB), (Nome do filme, ID, distancia,  Link para o IMDB)]
 					self.already_processed_recommendations[movie_title] = (distances, suggestions, lista_recomendacoes)
 
+					self.delete_data()
 					return distances, suggestions, lista_recomendacoes
 				else:
 					raise Exception("Desculpe, foi impossivel gerar recomendações")
 					
+
+	def delete_data(self): #função criada para conseguir utilizar o App no Heroku, pois sem isso ficaria crashando por falta de memoria
+		import gc
+		del self.data_and_model
+		gc.collect()
+		self.data_and_model = None
 
 # class Model():
 # 	def __init__(self, path_to_model, model_type=1):
