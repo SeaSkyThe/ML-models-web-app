@@ -24,6 +24,19 @@ def home_page():
 def recommender_form_page():
     return render_template('recommender_form.html')
 
+@app.route('/references')
+def references_page():
+    return render_template('references.html')
+
+@app.route('/abstract')
+def abstract_page():
+    return render_template('abstract.html')
+
+@app.route('/intro')
+def introduction_page():
+    return render_template('introduction.html')
+
+
 @app.route('/recommender_results', methods=['POST'])
 def recommender_results_page():
     """Pega o filme de entrada e gera as recomendações"""
