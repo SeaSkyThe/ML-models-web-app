@@ -5,7 +5,10 @@ import gridfs
 
 import os
 import time
-from compressor import *
+try:
+	from compressor import *
+except:
+	from src.compressor import *
 # Criando objeto para comprimir os arquivos pickle de dados e dos modelos
 compressor = Compressor()
 
