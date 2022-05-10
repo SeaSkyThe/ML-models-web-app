@@ -30,9 +30,8 @@ class Database():
 		#utilizando Enviroment Variables
 		username = quote_plus(os.environ.get('MONGODB_USER'))
 		password = quote_plus(os.environ.get('MONGODB_PASSWORD'))
-		cluster = 'ML-WebApp'
-		uri = "mongodb+srv://" + username + ":" + password +"@ml-webapp.lrl8g.mongodb.net/ML-WebApp?retryWrites=true&w=majority"
-
+		cluster = 'ML-WebApp-Flask'
+		uri = "mongodb+srv://" + username + ":" + password + "@ml-webapp-flask.lrl8g.mongodb.net/" + cluster + "?retryWrites=true&w=majority"
 		#Criando conexao
 		try:
 			self.client = pymongo.MongoClient(uri, server_api=ServerApi('1'), serverSelectionTimeoutMS=5000) #conectando ao database
