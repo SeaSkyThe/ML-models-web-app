@@ -36,6 +36,10 @@ def abstract_page():
 def introduction_page():
     return render_template('introduction.html')
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
 
 @app.route('/recommender_results', methods=['POST'])
 def recommender_results_page():
