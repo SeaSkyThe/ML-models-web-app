@@ -11,4 +11,4 @@ Features:
 - MongoDB (Atlas) Database
 - API to get the model from the database (as a pickle object) and use it in memory.
 - Using IMDB api to show movies posters.
-- Bootstrap fronted.
+- Bootstrap frontend.
