@@ -1,35 +1,79 @@
-{% extends 'base.html' %}
-{% block title %}
-	<title>Introdução</title>
-{% endblock %}
+{% extends 'base.html' %} {% block title %}
+<title>Introduction</title>
+{% endblock %} {% block content %}
+<div
+    class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light"
+>
+    <div class="col-md-10 mx-auto">
+        <h1 class="display-4 font-weight-normal pb-4">Introdução</h1>
+        <p class="lead font-weight-normal text-justify">
+            Sistemas de recomendação tem sido uma parte crucial dentro do
+            mercado atualmente, isso porque, com o avanço massivo da tecnologia,
+            principalmente da Internet, e o aumento do uso de sistemas na web,
+            diversos serviços passaram a ter que atender toda uma nova e
+            crescente demanda de clientes de maneira mais satisfatória. Os
+            sistemas de recomendação entram então nessa lacuna, auxiliando os
+            clientes na decisão para escolher quais os serviços e/ou produtos
+            que melhor atendem seus gostos pessoais, (BOURAGA et al., 2014).
+            Adicionalmente, com o aumento da demanda, vem o aumento desmedido do
+            volume de dados, e olhando por essa ótica, fica claro que é
+            indispensável o uso de sistemas e abordagens computacionais para
+            auxiliar na tarefa de recomendação, e é nesse ponto que entram os
+            conceitos de machine learning para construção de sistemas de
+            recomendação, que se acabaram por se tornar cruciais para o
+            funcionamento de diversos negócios, sendo exemplos, os serviços de
+            streaming e os e-commerces.
+        </p>
 
-{% block content %}
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-	<div class="col-md-10 mx-auto">
-		<h1 class="display-4 font-weight-normal pb-4">Introdução</h1>
-		<p class="lead font-weight-normal text-justify">Sistemas de recomendação tem sido uma parte crucial dentro do mercado atualmente, isso porque, com o avanço massivo da tecnologia, principalmente da Internet, e o aumento do uso de sistemas na web, diversos serviços passaram a ter que atender toda uma nova e crescente demanda de clientes de maneira mais satisfatória. Os sistemas de recomendação entram então nessa lacuna, auxiliando os clientes na decisão para escolher quais os serviços e/ou produtos que melhor atendem seus gostos pessoais, (BOURAGA et al., 2014). Adicionalmente, com o aumento da demanda, vem o aumento desmedido do volume de dados, e olhando por essa ótica, fica claro que é indispensável o uso de sistemas e abordagens computacionais para auxiliar na tarefa de recomendação, e é nesse ponto que entram os conceitos de machine learning para construção de sistemas de recomendação, que se acabaram por se tornar cruciais para o funcionamento de diversos negócios, sendo exemplos, os serviços de streaming e os e-commerces.</p>
+        <p class="lead font-weight-normal text-justify">
+            De acordo com MISHRA et al., 2021 existem alguns problemas
+            relacionados à sistemas de recomendação (atrelados a sua base em
+            machine learning), como exemplo, a esparsidade dos dados, super
+            especialização do modelo e a falta de informação sobre determinado
+            dado.
+        </p>
+        <p class="lead font-weight-normal text-justify">
+            Os objetivos principais deste trabalho consistem em estudar e
+            analisar técnicas e modelos de Machine Learning obtendo assim,
+            embasamento teórico e um melhor entendimento sobre elas, para que
+            seja possível desenvolver alguns modelos de recomendação para então
+            interpretá-los e compará-los, chegando a uma conclusão de qual o
+            comportamento dos modelos e qual deles tem mais potencial de ser
+            aplicado de fato, considerando os problemas observados em cada um.
+            Para isso foram analisadas algumas técnicas e feitas algumas
+            manipulações de dados em um dataset, para que fosse possível a
+            construção desses sistemas de recomendação.
+        </p>
 
-		<p class="lead font-weight-normal text-justify">De acordo com MISHRA et al., 2021 existem alguns problemas relacionados à sistemas de recomendação (atrelados a sua base em machine learning), como exemplo, a esparsidade dos dados, super especialização do modelo e a falta de informação sobre determinado dado.</p>
-		<p class="lead font-weight-normal text-justify">Os objetivos principais deste trabalho consistem em estudar e analisar  técnicas e modelos de Machine Learning obtendo assim, embasamento teórico e um melhor entendimento sobre elas, para que seja possível desenvolver alguns modelos de recomendação para então interpretá-los e compará-los, chegando a uma conclusão de qual o comportamento dos modelos e qual deles tem mais potencial de ser aplicado de fato, considerando os problemas observados em cada um. Para isso foram analisadas algumas técnicas e feitas algumas manipulações de dados em um dataset, para que fosse possível a construção desses sistemas de recomendação.</p>
-		
-		<p class="lead font-weight-normal text-justify">Os objetivos principais deste trabalho consistem em estudar e analisar  técnicas e modelos de Machine Learning obtendo assim, embasamento teórico e um melhor entendimento sobre elas, para que seja possível desenvolver alguns modelos de recomendação para então interpretá-los e compará-los, chegando a uma conclusão de qual o comportamento dos modelos e qual deles tem mais potencial de ser aplicado de fato, considerando os problemas observados em cada um. Para isso foram analisadas algumas técnicas e feitas algumas manipulações de dados em um dataset, para que fosse possível a construção desses sistemas de recomendação.</p>
+        <p class="lead font-weight-normal text-justify">
+            Os objetivos principais deste trabalho consistem em estudar e
+            analisar técnicas e modelos de Machine Learning obtendo assim,
+            embasamento teórico e um melhor entendimento sobre elas, para que
+            seja possível desenvolver alguns modelos de recomendação para então
+            interpretá-los e compará-los, chegando a uma conclusão de qual o
+            comportamento dos modelos e qual deles tem mais potencial de ser
+            aplicado de fato, considerando os problemas observados em cada um.
+            Para isso foram analisadas algumas técnicas e feitas algumas
+            manipulações de dados em um dataset, para que fosse possível a
+            construção desses sistemas de recomendação.
+        </p>
 
-		<p class="lead font-weight-normal text-justify">Nos resultados, o primeiro dos modelos, de filtragem colaborativa, que utiliza as notas, é bem promissor e se dá bem na maioria dos cenários. Já o segundo, que utiliza a técnica baseada em conteúdo e gêneros, não se dá tão bem com a geração de recomendações através dos dados disponíveis. Por fim, o último também baseado em conteúdo, porém utilizando tags, gerou recomendações bem concisas e confiáveis, apesar das distâncias altas entre as instâncias de dados (por conta da grande quantidade de características).</p>
+        <p class="lead font-weight-normal text-justify">
+            Nos resultados, o primeiro dos modelos, de filtragem colaborativa,
+            que utiliza as notas, é bem promissor e se dá bem na maioria dos
+            cenários. Já o segundo, que utiliza a técnica baseada em conteúdo e
+            gêneros, não se dá tão bem com a geração de recomendações através
+            dos dados disponíveis. Por fim, o último também baseado em conteúdo,
+            porém utilizando tags, gerou recomendações bem concisas e
+            confiáveis, apesar das distâncias altas entre as instâncias de dados
+            (por conta da grande quantidade de características).
+        </p>
+    </div>
 
-		
-	</div>
+    <!-- icones do lado direito -->
 
-	
-
-	<!-- icones do lado direito -->
-	
-
-	<!-- <i class="fa-solid fa-film "></i>
+    <!-- <i class="fa-solid fa-film "></i>
 	<i class="fa-solid fa-film fa-film-2 "></i> -->
-
-	
-
 </div>
-
 
 {% endblock %}
